@@ -1,5 +1,7 @@
 # Nix image for Bitbucket Pipelines
 
+> https://jira.atlassian.com/browse/BCLOUD-21567
+
 For some weird reason, Bitbucket Pipelines runs various commands using absolute paths
 in its setup script which results in errors like these:
 
@@ -21,14 +23,14 @@ Last, but not least Flakes are enabled by default.
 
 ```yaml
 pipelines:
-    branches:
-        master:
-            - step:
-                image: ghcr.io/sagikazarmark/nix-bitbucket
-                name: Tests
-                script:
-                    - nix-channel --update
-                    - nix develop -c YOUR_TEST_COMMAND
+  branches:
+    master:
+      - step:
+        image: ghcr.io/auvred/nix-bitbucket
+        name: Tests
+        script:
+          - nix-channel --update
+          - nix develop -c YOUR_TEST_COMMAND
 ```
 
 **Pro tip:** Use a [tagged version](https://github.com/users/sagikazarmark/packages/container/nix-bitbucket/versions) instead of `latest`.
